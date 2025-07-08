@@ -1,0 +1,14 @@
+name: Lint Python Code
+
+on:
+  workflow_call:
+
+jobs:
+  lint: # The name of the job
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint with Ruff
+        uses: androidsassocies/.gha/.github/actions/python@main
+        with:
+          ruff: true
