@@ -1,0 +1,14 @@
+name: Build unreal plugin
+
+on:
+  workflow_call:
+
+jobs:
+  build-unreal-plugin:
+    name: Build unreal plugin
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate plugin build
+        run: |
+            sh .\Engine\GeneratePluginBuild.sh

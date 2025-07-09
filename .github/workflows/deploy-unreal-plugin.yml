@@ -1,0 +1,14 @@
+name: Deploy unreal plugin
+
+on:
+  workflow_call:
+
+jobs:
+  deploy-unreal-plugin:
+    name: Deploy unreal plugin
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy plugin build
+        run: |
+            sh .\DeployPluginBuild.sh
