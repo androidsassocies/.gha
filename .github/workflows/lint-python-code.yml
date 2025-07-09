@@ -1,10 +1,10 @@
-name: Lint Python Code
+name: Lint python code
 
 on:
   workflow_call:
 
 jobs:
-  lint: # The name of the job
+  lint:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
