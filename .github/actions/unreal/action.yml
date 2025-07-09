@@ -19,6 +19,6 @@ runs:
   steps:
 
     - name: Deploy plugin build
-      shell: bash
+      shell: cmd
       run: |
           sh ./DeployPluginBuild.sh
