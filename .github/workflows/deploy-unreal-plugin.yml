@@ -12,4 +12,4 @@ jobs:
       - name: Deploy plugin build
         uses: androidsassocies/.gha/.github/actions/unreal@main
         with:
-          version: 5.5
+          engine_version: 5.5
