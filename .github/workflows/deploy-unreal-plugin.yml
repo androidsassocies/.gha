@@ -12,5 +12,4 @@ jobs:
       - name: Deploy plugin build
         run: |
             chmod +x ./DeployPluginBuild.sh
-            sh ./DeployPluginBuild.sh
-        shell: bash
+            bash ./DeployPluginBuild.sh
