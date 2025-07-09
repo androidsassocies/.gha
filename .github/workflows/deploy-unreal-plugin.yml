@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy plugin build
-        run: |
-            chmod +x ./DeployPluginBuild.sh
-            bash ./DeployPluginBuild.sh
+        uses: androidsassocies/.gha/.github/actions/unreal@main
+        with:
+          version: 5.5

@@ -5,6 +5,7 @@ on:
 
 jobs:
   lint:
+    name: Lint python code
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
