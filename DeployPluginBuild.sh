@@ -107,6 +107,8 @@ fi
 # Final target directory (e.g. 'C:/Shared/MyPlugins/5.5/MyC++Plugin')
 TARGET=$TARGET/$VERSION/$name
 
+Net Use
+
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
     echo "$TARGET"
