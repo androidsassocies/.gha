@@ -40,10 +40,10 @@ fi
 
 
 # Navigate to the script's directory.
-pushd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# pushd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Navigate to ROOT.
-cd "$ROOT"
+pushd "$(cd "$ROOT" && pwd)"
 
 # Find .uplugin descriptor file.
 uplugin=$(find -type f -name '*.uplugin' -print -quit)
@@ -89,7 +89,7 @@ if [ -z "${desc_version}" ]; then
     popd
 
     # Then navigate to plugin root.
-    cd "$ROOT"
+    pushd "$ROOT"
 
 fi
 
