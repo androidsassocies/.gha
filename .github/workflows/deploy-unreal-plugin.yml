@@ -23,4 +23,4 @@ jobs:
       - name: Deploy plugin build
         run: |
           dir
-          sh ./.gha/DeployPluginBuild.sh
+          sh ./.gha/DeployPluginBuild.sh -t /W/PLUGINS/ -v 5.5
