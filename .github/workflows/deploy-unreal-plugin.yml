@@ -14,9 +14,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: androidsassocies/.gha
-      - name: Wait
-        shell: pwsh
-        run : sleep 30s
+      - name: Echo
+        run : |
+          echo "Hello, world!"
       - name: Deploy plugin build
         # uses: androidsassocies/.gha/.github/actions/unreal@main
         # with:
