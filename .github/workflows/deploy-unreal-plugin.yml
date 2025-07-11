@@ -23,4 +23,4 @@ jobs:
       - name: Deploy plugin build
         shell: "C:/Program Files/Git/bin/bash.exe"
         run: |
-          sh ./.gha/DeployPluginBuild.sh -t "W:/PLUGINS/" -v "5.5"
+          sh ./.gha/DeployPluginBuild.sh -v 5.5
