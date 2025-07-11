@@ -23,6 +23,7 @@ jobs:
       - name: Where bash
         run : |
           where bash
+          where git
 
       - name: Deploy plugin build
         shell: "C:/Program Files/Git/bin/bash.exe"
