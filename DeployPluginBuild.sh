@@ -108,12 +108,13 @@ fi
 TARGET=$TARGET/$VERSION/$name
 
 net use W:
+ls -l W:/
 
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
     echo "$TARGET"
     mkdir ./new_folder
-    mount '\\10.21.16.105\unreal' ./new_folder
+    mount 'W:' ./new_folder
 #    if ! mkdir -p "$TARGET"; then
 #        exit 1
 #    fi
@@ -125,6 +126,8 @@ excludes="$excludes|.gha" # Github Actions reusable workflows
 excludes="$excludes|Intermediate" # compiled source files
 excludes="$excludes|.exe|.exp|.lib|.pdb" # compiled and debug files
 excludes="$excludes|DeployPluginBuild.sh" # the script itself
+excludes="$excludes|new_folder" # the script itself
+
 
 # Exclude the source code
 if [ "${SOURCE}" = false ]; then
