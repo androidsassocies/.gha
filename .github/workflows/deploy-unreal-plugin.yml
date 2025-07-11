@@ -9,7 +9,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy plugin build
-        uses: androidsassocies/.gha/.github/actions/unreal@main
+
+      - name : Checkout reusable workflow repository
+        uses: actions/checkout@v4
         with:
-          engine_version: 5.5
+          repository: androidsassocies/.gha
+      - name: Deploy plugin build
+        # uses: androidsassocies/.gha/.github/actions/unreal@main
+        # with:
+        #   engine_version: 5.5
+        run: |
+          sh ${GITHUB_WORKSPACE}/.gha/DeployPluginBuild.sh
