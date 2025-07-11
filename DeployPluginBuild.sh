@@ -114,6 +114,7 @@ fi
 
 # List things that we want to exclude from deployment
 excludes=".git|.github|.gitattributes|.gitignore|.p4ignore|.plastic|ignore.conf" # VCS
+excludes="$excludes|.gha" # Github Actions reusable workflows
 excludes="$excludes|Intermediate" # compiled source files
 excludes="$excludes|.exe|.exp|.lib|.pdb" # compiled and debug files
 excludes="$excludes|DeployPluginBuild.sh" # the script itself
