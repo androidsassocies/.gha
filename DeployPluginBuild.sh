@@ -109,6 +109,8 @@ TARGET=$TARGET/$VERSION/$name
 
 net use W:
 df
+net use W: '\\10.21.16.105\unreal\' /PERSISTENT:NO
+df
 ls -l /w
 
 # Create the final target directory if it doesn't exist
