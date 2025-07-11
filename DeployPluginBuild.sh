@@ -111,6 +111,8 @@ net use W:
 df
 net use W: '\\10.21.16.105\unreal\' /PERSISTENT:NO
 df
+ls -l '\\10.21.16.105\unreal\'
+net use w: '\\10.21.16.105\unreal\' "/user:nico.c"
 ls -l /w
 
 # Create the final target directory if it doesn't exist
