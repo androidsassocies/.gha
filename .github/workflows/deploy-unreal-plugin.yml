@@ -20,8 +20,11 @@ jobs:
         run : |
           echo "Hello, world!"
 
+      - name: Where bash
+        run : |
+          where bash
+
       - name: Deploy plugin build
         shell: "C:/Program Files/Git/bin/bash.exe"
         run: |
-          where bash
           sh ./.gha/DeployPluginBuild.sh -v 5.5
