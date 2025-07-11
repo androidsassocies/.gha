@@ -113,7 +113,7 @@ net use W:
 if [ ! -d "${TARGET}" ]; then
     echo "$TARGET"
     mkdir ./new_folder
-    mount -t drvfs '\\10.21.16.105\unreal' ./new_folder
+    mount '\\10.21.16.105\unreal' ./new_folder
 #    if ! mkdir -p "$TARGET"; then
 #        exit 1
 #    fi
