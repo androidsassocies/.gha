@@ -21,6 +21,5 @@ jobs:
           echo "Hello, world!"
 
       - name: Deploy plugin build
-        shell: "C:/Program Files/Git/bin/bash.exe"
         run: |
-          sh ./.gha/DeployPluginBuild.sh -t /W/PLUGINS/ -v 5.5
+          "C:/Program Files/Git/bin/bash.exe" ./.gha/DeployPluginBuild.sh -t /W/PLUGINS/ -v 5.5
