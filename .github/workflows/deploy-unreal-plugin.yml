@@ -15,6 +15,7 @@ jobs:
         with:
           repository: androidsassocies/.gha
       - name: Wait
+        shell: pwsh
         run : sleep 30s
       - name: Deploy plugin build
         # uses: androidsassocies/.gha/.github/actions/unreal@main
