@@ -108,7 +108,8 @@ fi
 TARGET=$TARGET/$VERSION/$name
 
 net use W:
-ls -l W:/
+df
+ls -l /w
 
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
