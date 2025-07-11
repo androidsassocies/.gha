@@ -109,6 +109,7 @@ TARGET=$TARGET/$VERSION/$name
 
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
+    echo $TARGET
     mkdir -p "$TARGET"
 fi
 
