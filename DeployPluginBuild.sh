@@ -105,7 +105,7 @@ if [ "${desc_version}" ]; then
 fi
 
 # Final target directory (e.g. 'C:/Shared/MyPlugins/5.5/MyC++Plugin')
-TARGET=$TARGET/$VERSION/$name
+TARGET='$TARGET/$VERSION/$name'
 
 net use W:
 df
@@ -117,9 +117,9 @@ ls -l '\\10.21.16.105\unreal\PLUGINS'
 ls -l /w
 
 # Create the final target directory if it doesn't exist
-if [ ! -d "${TARGET}" ]; then
-    echo "$TARGET"
-    if ! mkdir -p "$TARGET"; then
+if [ ! -d '${TARGET}' ]; then
+    echo '$TARGET'
+    if ! mkdir -p '$TARGET'; then
         exit 1
     fi
 fi
@@ -144,7 +144,7 @@ if [ "${CLEAN}" = true ]; then
 fi
 
 # Copy the files from the plugin root to the final target directory
-cp -fprv "$ROOT"/!($excludes) "$TARGET"
+cp -fprv "$ROOT"/!($excludes) '$TARGET'
 
 # Raise any error
 if [ $? -ne 0 ]; then
