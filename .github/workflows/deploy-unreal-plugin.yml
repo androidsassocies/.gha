@@ -30,4 +30,4 @@ jobs:
         #shell: "C:/Program Files/Git/bin/bash.exe"
         shell: cmd
         run: |
-          "C:/Program Files/Git/bin/bash.exe" ./.gha/DeployPluginBuild.sh -r ${{ github.workspace }} -t "W:/PLUGINS" -v 5.5
+          "C:/Program Files/Git/bin/bash.exe" ./.gha/DeployPluginBuild.sh -r ${{ github.workspace }} -t "C:/PLUGINS" -v 5.5
