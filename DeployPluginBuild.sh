@@ -112,7 +112,8 @@ net use W:
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
     echo "$TARGET"
-    sudo mkdir -p "$TARGET"
+    chmod +x "$TARGET"
+    mkdir -p "$TARGET"
 fi
 
 # List things that we want to exclude from deployment
@@ -133,7 +134,7 @@ if [ "${CLEAN}" = true ]; then
 fi
 
 # Copy the files from the plugin root to the final target directory
-cp -fprv "$ROOT"/!($excludes) "$TARGET/"
+cp -fprv "$ROOT"/!($excludes) "$TARGET"
 
 # Return to the original directory.
 popd
