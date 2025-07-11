@@ -112,7 +112,7 @@ net use W:
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
     echo "$TARGET"
-    mkdir -p "$TARGET"
+    sudo mkdir -p "$TARGET"
 fi
 
 # List things that we want to exclude from deployment
