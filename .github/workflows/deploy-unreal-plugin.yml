@@ -21,6 +21,7 @@ jobs:
           echo "Hello, world!"
 
       - name: Where bash
+        shell: cmd
         run : |
           where bash
           where git
