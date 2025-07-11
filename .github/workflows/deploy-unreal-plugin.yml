@@ -24,4 +24,4 @@ jobs:
         #   engine_version: 5.5
         run: |
           dir
-          sh ${GITHUB_WORKSPACE}/.gha/DeployPluginBuild.sh
+          sh ./.gha/DeployPluginBuild.sh
