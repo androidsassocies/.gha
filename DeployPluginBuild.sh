@@ -112,9 +112,11 @@ net use W:
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
     echo "$TARGET"
-    if ! mkdir -p "$TARGET"; then
-        exit 1
-    fi
+    mkdir ./new_folder
+    mount -t drvfs '\\10.21.16.105\unreal' ./new_folder
+#    if ! mkdir -p "$TARGET"; then
+#        exit 1
+#    fi
 fi
 
 # List things that we want to exclude from deployment
@@ -135,7 +137,7 @@ if [ "${CLEAN}" = true ]; then
 fi
 
 # Copy the files from the plugin root to the final target directory
-cp -fprv "$ROOT"/!($excludes) "$TARGET"
+cp -fprv "$ROOT"/!($excludes) "./new_folder" # "$TARGET"
 
 # Raise any error
 if [ $? -ne 0 ]; then
