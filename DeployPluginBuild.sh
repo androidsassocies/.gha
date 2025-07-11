@@ -107,7 +107,10 @@ fi
 # Final target directory (e.g. 'C:/Shared/MyPlugins/5.5/MyC++Plugin')
 TARGET=$TARGET/$VERSION/$name
 
-Net Use
+
+net use w:
+net use w: "\\10.21.16.105\unreal\\" /persistent:no
+net use
 
 # Create the final target directory if it doesn't exist
 if [ ! -d "${TARGET}" ]; then
