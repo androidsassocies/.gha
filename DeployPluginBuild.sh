@@ -133,7 +133,7 @@ if [ "${CLEAN}" = true ]; then
 fi
 
 # Copy the files from the plugin root to the final target directory
-cp -fprv "$ROOT"/!($excludes) "$TARGET"
+cp -fprv "$ROOT"/!($excludes) "$TARGET/"
 
 # Return to the original directory.
 popd
