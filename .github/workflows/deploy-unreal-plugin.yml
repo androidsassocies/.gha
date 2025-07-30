@@ -27,4 +27,4 @@ jobs:
         #shell: "C:/Program Files/Git/bin/bash.exe"
         shell: cmd
         run: |
-          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t '\\\\10.21.16.105\unreal\PLUGINS' -v 5.5
+          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t '//10.21.16.105/unreal/PLUGINS' -v 5.5
