@@ -1,6 +1,15 @@
 #!/bin/bash
 shopt -s extglob # required to use cp with exclude pattern.
 
+# Redefine pushd to silent.
+pushd () {
+    command pushd "$@" > /dev/null
+}
+# Redefine popd to silent.
+popd () {
+    command popd "$@" > /dev/null
+}
+
 # How to use this script.
 usage="$(basename "$0") [-h] [-r ROOT] [-t TARGET] [-v VERSION] [-c CLEAN] [-s SOURCE]
 Deploy an unreal plugin build to target path
@@ -123,7 +132,7 @@ if [ ! -d "${TARGET}" ]; then
 else
     # Remove target directory content first if argument -c is true.
     if [ "${CLEAN}" = true ]; then
-        echo "Target directory $TARGET already exists, trying to remove its content first (-c)"
+        echo "Target directory $TARGET already exists, trying to remove its content first:"
         rm -rfv "$TARGET/"*
     else
         echo "Target directory $TARGET already exists, you should first try removing its content to avoid possible conflicts (-c)"
@@ -131,6 +140,7 @@ else
 fi
 
 # Copy the files from the plugin root to the final target directory.
+echo "Deploying to $TARGET:"
 cp -fprv "$ROOT"/!($excludes) "$TARGET"
 
 # Raise any error
