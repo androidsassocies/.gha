@@ -22,7 +22,12 @@ jobs:
           where bash
           where git
 
+      - name: powershell allow...
+        shell: cmd
+        run: powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force"
+
       - name: Make the script files executable
+        shell: cmd
         run: chmod +x ./.gha/deploy_plugin_build.sh
 
       - name: Deploy plugin build
