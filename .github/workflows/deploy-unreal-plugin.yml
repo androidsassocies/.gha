@@ -35,4 +35,4 @@ jobs:
         #shell: "C:/Program Files/Git/bin/bash.exe"
         shell: cmd
         run: |
-          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t $env:PROD_UE_PLUGINS_PATH -v 5.5 -c
+          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t "%PROD_UE_PLUGINS_PATH%" -v 5.5 -c
