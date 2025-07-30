@@ -16,10 +16,6 @@ jobs:
           repository: androidsassocies/.gha
           path: .gha
 
-      - name: Echo
-        run : |
-          echo "Hello, world!"
-
       - name: Where bash
         shell: cmd
         run : |
@@ -27,7 +23,8 @@ jobs:
           where git
 
       - name: Deploy plugin build
+        # Pay attention to the target path, '\\' gives '\', so to get a real '\\' write '\\\\'.
         #shell: "C:/Program Files/Git/bin/bash.exe"
         shell: cmd
         run: |
-          "C:/Program Files/Git/bin/bash.exe" ./.gha/DeployPluginBuild.sh -r ${{ github.workspace }} -t '\\\\10.21.16.105\unreal\PLUGINS' -v 5.5
+          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t '\\\\10.21.16.105\unreal\PLUGINS' -v 5.5
