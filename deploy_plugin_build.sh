@@ -123,10 +123,10 @@ if [ ! -d "${TARGET}" ]; then
 else
     # Remove target directory content first if argument -c is true.
     if [ "${CLEAN}" = true ]; then
-        echo "Target directory $TARGET already exist, trying to remove its content first (-c)"
+        echo "Target directory $TARGET already exists, trying to remove its content first (-c)"
         rm -rf "$TARGET/"*
     else
-        echo "Target directory $TARGET already exist, you should first try removing its content to avoid possible conflicts (-c)"
+        echo "Target directory $TARGET already exists, you should first try removing its content to avoid possible conflicts (-c)"
     fi
 fi
 

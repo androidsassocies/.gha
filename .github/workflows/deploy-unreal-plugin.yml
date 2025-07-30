@@ -22,8 +22,13 @@ jobs:
           where bash
           where git
 
+      - name: Make the script files executable
+        run: chmod +x ./.gha/deploy_plugin_build.sh
+
       - name: Deploy plugin build
-        # Pay attention to the target path, '\\' gives '\', so to get a real '\\' write '\\\\'.
+        # Pay attention to the target path, '\\' gives '\',
+        # so to get a real '\\' write '\\\\' or use '/' instead of '\'.
+        # (e.g '\\\\10.20.19.152\Shared\MyPlugins' or '//10.20.19.152/Shared/MyPlugins')
         #shell: "C:/Program Files/Git/bin/bash.exe"
         shell: cmd
         run: |
