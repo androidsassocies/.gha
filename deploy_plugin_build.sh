@@ -71,7 +71,7 @@ done < $uplugin
 # If no version provided by the .uplugin descriptor file, check if we are inside an unreal project to find one.
 if [ -z "${desc_version}" ]; then
     # In theory, if we are inside a 'Plugins' folder inside an unreal project, we take back 2 levels.
-    cd "../.."
+    pushd "../.."
     # Find .uproject descriptor file.
     uproject=$(find -type f -name '*.uproject' -print -quit)
 
