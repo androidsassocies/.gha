@@ -39,14 +39,14 @@ if [ ! "$TARGET" ] || [ ! "$VERSION" ]; then
 fi
 
 
-# Redefine pushd to silent.
-pushd () {
-    command pushd "$@" > /dev/null
-}
-# Redefine popd to silent.
-popd () {
-    command popd "$@" > /dev/null
-}
+# # Redefine pushd to silent.
+# pushd () {
+#     command pushd "$@" > /dev/null
+# }
+# # Redefine popd to silent.
+# popd () {
+#     command popd "$@" > /dev/null
+# }
 
 
 # Navigate to the script's directory.
