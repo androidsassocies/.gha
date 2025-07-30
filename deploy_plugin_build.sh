@@ -1,6 +1,15 @@
 #!/bin/bash
 shopt -s extglob # required to use cp with exclude pattern.
 
+# Redefine pushd to silent.
+pushd () {
+    command pushd "$@" > /dev/null
+}
+# Redefine popd to silent.
+popd () {
+    command popd "$@" > /dev/null
+}
+
 # How to use this script.
 usage="$(basename "$0") [-h] [-r ROOT] [-t TARGET] [-v VERSION] [-c CLEAN] [-s SOURCE]
 Deploy an unreal plugin build to target path
@@ -37,16 +46,6 @@ if [ ! "$TARGET" ] || [ ! "$VERSION" ]; then
   echo "arguments -t and -v must be provided"
   echo "$usage" >&2; exit 1
 fi
-
-
-# # Redefine pushd to silent.
-# pushd () {
-#     command pushd "$@" > /dev/null
-# }
-# # Redefine popd to silent.
-# popd () {
-#     command popd "$@" > /dev/null
-# }
 
 
 # Navigate to the script's directory.
