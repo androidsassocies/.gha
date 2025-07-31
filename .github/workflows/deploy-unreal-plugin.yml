@@ -19,6 +19,22 @@ jobs:
     name: Deploy unreal plugin
     runs-on: self-hosted
     steps:
+
+      - name: Get branch name
+        id: branch-name
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "BRANCH_NAME=${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          else
+            echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Print branch name
+        shell: bash
+        run: |
+          echo "Branch name: ${{ steps.branch-name.outputs.BRANCH_NAME }}"
+
       # - run: wsl --set-default-version 1
       # - run: wsl --status
       # # - uses: Vampire/setup-wsl@v6
@@ -27,9 +43,9 @@ jobs:
       #     wsl --shutdown
       #     wsl --list --verbose
 
-      - name: Get branch names
-        id: branch-names
-        uses: tj-actions/branch-names@v9
+      # - name: Get branch names
+      #   id: branch-names
+      #   uses: tj-actions/branch-names@v9
 
       - uses: actions/checkout@v4
 
