@@ -2,10 +2,10 @@ name: Deploy unreal plugin
 
 on:
   workflow_call:
-    inputs:
-      version:
-        required: true
-        type: string
+    # inputs:
+    #   version:
+    #     required: true
+    #     type: string
     secrets:
       target:
         required: true
