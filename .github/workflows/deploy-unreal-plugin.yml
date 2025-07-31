@@ -10,6 +10,10 @@ on:
       target:
         required: true
 
+defaults:
+    run:
+      shell: cmd
+
 jobs:
   deploy-unreal-plugin:
     name: Deploy unreal plugin
