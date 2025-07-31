@@ -12,7 +12,7 @@ on:
 
 defaults:
     run:
-      shell: "C:/Program Files/Git/bin/bash.exe"
+      shell: powershell
 
 jobs:
   deploy-unreal-plugin:
