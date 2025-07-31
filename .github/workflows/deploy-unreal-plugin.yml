@@ -32,12 +32,7 @@ jobs:
             echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_OUTPUT
           fi
 
-          # Get the version
-          if [ "$BRANCH_NAME" == "main" ]; then
-            echo "VERSION=${{ inputs.main-version }}" >> $GITHUB_OUTPUT
-          else
-            echo "VERSION=$BRANCH_NAME" >> $GITHUB_OUTPUT
-          fi
+          echo $BRANCH_NAME
 
       - name: Print branch name
         shell: bash
