@@ -15,6 +15,10 @@ jobs:
     name: Deploy unreal plugin
     runs-on: self-hosted
     steps:
+      - name: Get branch names
+        id: branch-names
+        uses: tj-actions/branch-names@v9
+
       - uses: actions/checkout@v4
 
       - name: Checkout reusable workflow repository
@@ -40,4 +44,4 @@ jobs:
         #shell: "C:/Program Files/Git/bin/bash.exe"
         shell: cmd
         run: |
-          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t ${{ secrets.target }} -v ${{ inputs.version }} -c
+          "C:/Program Files/Git/bin/bash.exe" ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t ${{ secrets.target }} -v ${{ steps.branch-names.outputs.current_branch }} -c
