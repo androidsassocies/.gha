@@ -80,6 +80,6 @@ jobs:
         # so to get a real '\\' write '\\\\' or use '/' instead of '\'.
         # (e.g '\\\\10.20.19.152\Shared\MyPlugins' or '//10.20.19.152/Shared/MyPlugins')
         #shell: "C:/Program Files/Git/bin/bash.exe"
-        shell: cmd
+        shell: bash
         run: |
-          bash ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t ${{ secrets.target }} -v ${{ steps.branch-name.outputs.VERSION }} -c
+          sh ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t ${{ secrets.target }} -v ${{ steps.branch-name.outputs.VERSION }} -c
