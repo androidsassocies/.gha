@@ -25,16 +25,16 @@ jobs:
         shell: bash
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "BRANCH_NAME=${{ github.head_ref }}" >> $GITHUB_OUTPUT
+            echo "$BRANCH_NAME=${{ github.head_ref }}" >> $GITHUB_OUTPUT
           else
-            echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+            echo "$BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
           fi
 
           # Get the version
           if [ "$BRANCH_NAME" == "main" ]; then
-            echo "VERSION=${{ inputs.main-version }}" >> $GITHUB_OUTPUT
+            echo "$VERSION=${{ inputs.main-version }}" >> $GITHUB_OUTPUT
           else
-            echo "VERSION=$BRANCH_NAME" >> $GITHUB_OUTPUT
+            echo "$VERSION=$BRANCH_NAME" >> $GITHUB_OUTPUT
           fi
 
       - name: Print branch name
