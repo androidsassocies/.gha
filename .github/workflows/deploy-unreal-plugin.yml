@@ -10,9 +10,9 @@ on:
       target:
         required: true
 
-defaults:
-    run:
-      shell: powershell
+# defaults:
+#     run:
+#       shell: powershell
 
 jobs:
   deploy-unreal-plugin:
