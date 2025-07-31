@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name : Checkout reusable workflow repository
+      - name: Checkout reusable workflow repository
         uses: actions/checkout@v4
         with:
           repository: androidsassocies/.gha
@@ -25,7 +25,7 @@ jobs:
 
       - name: Where bash
         shell: cmd
-        run : |
+        run: |
           where bash
           where git
 
