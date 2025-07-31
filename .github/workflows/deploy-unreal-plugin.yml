@@ -20,7 +20,7 @@ jobs:
     runs-on: self-hosted
     steps:
 
-      - name: Get branch name
+      - name: Get version from branch name
         id: branch-name
         shell: bash
         run: |
@@ -32,24 +32,18 @@ jobs:
             echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_OUTPUT
           fi
 
-          echo $BRANCH_NAME
+          echo "Branch name: $BRANCH_NAME"
 
           # Get the version
           if [ "$BRANCH_NAME" == "main" ]; then
-            echo "VERSION=${{ inputs.main-version }}" >> $GITHUB_OUTPUT
+            VERSION=${{ inputs.main-version }}
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           else
-            echo "VERSION=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          VERSION=$BRANCH_NAME
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           fi
 
-      - name: Print branch name
-        shell: bash
-        run: |
-          echo "Branch name: ${{ steps.branch-name.outputs.BRANCH_NAME }}"
-
-      - name: Get version
-        shell: bash
-        run: |
-          echo "Branch name: ${{ steps.branch-name.outputs.VERSION }}"
+          echo "Version: $VERSION"
 
       # - run: wsl --set-default-version 1
       # - run: wsl --status
