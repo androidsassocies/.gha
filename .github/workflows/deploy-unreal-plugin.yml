@@ -16,7 +16,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: WSL shutdown
-        run: wsl --shutdown
+        run: |
+          wsl --shutdown
+          wsl --list --verbose
 
       - name: Get branch names
         id: branch-names
