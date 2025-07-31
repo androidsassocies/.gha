@@ -15,6 +15,9 @@ jobs:
     name: Deploy unreal plugin
     runs-on: self-hosted
     steps:
+      - name: WSL shutdown
+        run: wsl --shutdown
+
       - name: Get branch names
         id: branch-names
         uses: tj-actions/branch-names@v9
