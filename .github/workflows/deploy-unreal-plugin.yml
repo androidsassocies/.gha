@@ -15,6 +15,9 @@ jobs:
     name: Deploy unreal plugin
     runs-on: self-hosted
     steps:
+      - run: wsl --set-default-version 1
+      - run: wsl --status
+      - uses: Vampire/setup-wsl@v6
       - name: WSL shutdown
         run: |
           wsl --shutdown
