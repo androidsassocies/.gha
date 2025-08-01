@@ -11,29 +11,32 @@ popd () {
 }
 
 # How to use this script.
-usage="$(basename "$0") [-h] [-r ROOT] [-t TARGET] [-v VERSION] [-c CLEAN] [-s SOURCE]
+usage="$(basename "$0") [-h] [-r ROOT] [-t TARGET] [-v VERSION] [-o OVERWRITE] [-c CLEAN] [-s SOURCE]
 Deploy an unreal plugin build to target path
 where:
     -h  show this help text.
     -r  plugin root directory where .uplugin description file is. (default '.')
-    -t  target path to deploy.
+    -t  target path to deploy. (e.g. 'C:/Shared/MyPlugins')
     -v  engine version of the plugin. (e.g. '5.5')
+    -o  overwrite existing unreal plugin at target path. (default 'false')
     -c  do a clean deployment by removing target directory content before deploying to ensure no files is kept from an older deployment. (default 'false')
-    -s  if want to deploy the source code too. (default 'false')"
+    -s  to deploy the source code too. (default 'false')"
 
 # Constants.
 ROOT="."
+OVERWRITE=false
 CLEAN=false
 SOURCE=false
 
 # Options and arguments queries.
-options=':hr:t:v:cs'
+options=':hr:t:v:ocs'
 while getopts $options option; do
     case "$option" in
         h) echo "$usage"; exit;;
         r) ROOT=$OPTARG;;
         t) TARGET=$OPTARG;;
         v) VERSION=$OPTARG;;
+        o) OVERRIDE=true;;
         c) CLEAN=true;;
         s) SOURCE=true;;
         :) printf "missing argument for -%s\n" "$OPTARG" >&2; echo "$usage" >&2; exit 1;;
@@ -47,6 +50,23 @@ if [ ! "$TARGET" ] || [ ! "$VERSION" ]; then
   echo "$usage" >&2; exit 1
 fi
 
+# Is target path a directory ?
+if [ ! -d "$TARGET" ]; then
+    echo "Target path $TARGET is not a directory, abort"
+    exit 1
+fi
+
+# Do we have the correct permissions to do so ? "-rwxr-xr-x" is "755" in octal.
+# if [ ! "$(stat -c '%A' "${TARGET}")" == "drwxr-xr-x" ]; then
+#     echo "Target path $TARGET does not have correct permissions, abort"
+#     exit 1
+# fi
+
+# Check write permission on the target directory.
+if [ ! -w "$TARGET" ]; then
+    echo "Target path $TARGET does not have write permission, abort"
+    exit 1
+fi
 
 # Navigate to the script's directory.
 pushd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -130,16 +150,23 @@ if [ ! -d "${TARGET}" ]; then
         exit 1
     fi
 else
-    # Remove target directory content first if argument -c is true.
-    if [ "${CLEAN}" = true ]; then
-        echo "Target directory $TARGET already exists, trying to remove its content first:"
-        rm -rfdv "$TARGET/"*
+    # The target directory exists but what says argument -o ?
+    if [ "${OVERWRITE}" = false ]; then
+        echo "Target directory $TARGET already exists, abort. See [-o OVERWRITE]"
+        exit 1
     else
-        echo "Target directory $TARGET already exists, you should first try removing its content to avoid possible conflicts (-c)"
+        # Remove target directory content first if argument -c is true.
+        if [ "${CLEAN}" = true ]; then
+            echo "Trying to remove its content first:"
+            rm -rfdv "$TARGET/"*
+        else
+            echo "You should first try removing its content to avoid possible conflicts. See [-c CLEAN]"
+        fi
     fi
 fi
 
 # Copy the files from the plugin root to the final target directory.
+# is it better to use cp -a ?
 echo "Deploying to $TARGET:"
 cp -fprv "$ROOT"/!($excludes) "$TARGET"
 
