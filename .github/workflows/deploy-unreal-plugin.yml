@@ -82,4 +82,4 @@ jobs:
         #shell: "C:/Program Files/Git/bin/bash.exe"
         # shell: bash
         run: |
-          sh ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t ${{ secrets.target }} -v ${{ steps.branch-name.outputs.VERSION }} -c
+          sh ./.gha/deploy_plugin_build.sh -r ${{ github.workspace }} -t ${{ secrets.target }} -v ${{ steps.branch-name.outputs.VERSION }} -o -c
