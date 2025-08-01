@@ -155,13 +155,12 @@ else
         echo "Final target directory $TARGET already exists, abort. See [-o OVERWRITE]"
         exit 1
     else
-        echo "Final target directory $TARGET already exists, overwrite it"
         # Remove final target directory content first if argument -c is true.
         if [ "${CLEAN}" = true ]; then
-            echo "Trying to remove its content first:"
+            echo "Final target directory $TARGET already exists, try removing its content first:"
             rm -rfdv "$TARGET/"*
         else
-            echo "You should first try removing its content to avoid possible conflicts. See [-c CLEAN]"
+            echo "Final target directory $TARGET already exists, you should first try removing its content to avoid possible conflicts. See [-c CLEAN]"
         fi
     fi
 fi
