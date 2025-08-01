@@ -36,7 +36,7 @@ while getopts $options option; do
         r) ROOT=$OPTARG;;
         t) TARGET=$OPTARG;;
         v) VERSION=$OPTARG;;
-        o) OVERRIDE=true;;
+        o) OVERWRITE=true;;
         c) CLEAN=true;;
         s) SOURCE=true;;
         :) printf "missing argument for -%s\n" "$OPTARG" >&2; echo "$usage" >&2; exit 1;;
