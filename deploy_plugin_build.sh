@@ -145,17 +145,18 @@ fi
 
 # Create the final target directory if it doesn't exist.
 if [ ! -d "${TARGET}" ]; then
-    echo "Target directory $TARGET does not exist, create it"
+    echo "Final target directory $TARGET does not exist, create it"
     if ! mkdir -p "$TARGET"; then
         exit 1
     fi
 else
-    # The target directory exists but what says argument -o ?
+    # The final target directory exists but what says argument -o ?
     if [ "${OVERWRITE}" = false ]; then
-        echo "Target directory $TARGET already exists, abort. See [-o OVERWRITE]"
+        echo "Final target directory $TARGET already exists, abort. See [-o OVERWRITE]"
         exit 1
     else
-        # Remove target directory content first if argument -c is true.
+        echo "Final target directory $TARGET already exists, overwrite it"
+        # Remove final target directory content first if argument -c is true.
         if [ "${CLEAN}" = true ]; then
             echo "Trying to remove its content first:"
             rm -rfdv "$TARGET/"*
