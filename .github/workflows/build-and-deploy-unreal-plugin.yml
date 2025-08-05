@@ -1,0 +1,41 @@
+name: Build and deploy unreal plugin
+
+on:
+  workflow_call:
+    inputs:
+      main_version:
+        required: true
+        type: string
+    secrets:
+      target:
+        required: true
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+
+      # Required for self-hosted runner on windows, due to restricted execution policy withs unsigned scripts from powershell.
+      - name: Make the script files executable
+        shell: cmd
+        run: powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force"
+
+      # Make sure that bash command on windows use Git Bash in the PATH, and not another obscure bash.exe that half works.
+      - name: Where bash
+        shell: cmd
+        run: |
+          where bash
+
+      - name: Checkout current repository
+        uses: actions/checkout@v4 # v4.2.2
+
+      - name: Build and deploy unreal plugin for version based on branch
+        uses: androidsassocies/.gha/.github/actions/unreal@main
+        with:
+          build_plugin: true
+          deploy_plugin: true
+          version_from_branch: true
+          version: ${{ inputs.main_version }}
+          plugin: ${{ github.workspace }}
+          target: ${{ secrets.target }}
+

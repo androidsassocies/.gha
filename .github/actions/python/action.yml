@@ -1,0 +1,40 @@
+name: Python Actions Collection
+description: Run actions for Python code to improve code review experience and CI/CD.
+author: brumenn
+
+inputs:
+  # Python Project Configuration is expected to be in a pyproject.toml.
+  root:
+    description: Python root directory.
+    required: false
+    default: .
+  toml:
+    description: pyproject.toml location.
+    required: false
+    default: pyproject.toml
+  python_version:
+    description: Python version to use.
+    required: false
+    default: 3.13
+  # Python tooling.
+  ruff:
+    desciption: Lint with Ruff
+    required: false
+    default: false
+  pytest:
+    desciption: Test with PyTest
+    required: false
+    default: false
+
+runs:
+  using: "composite"
+  steps:
+
+    - if: ${{ inputs.ruff == 'true' }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python_version }}
+        cache: "pip" # caching pip dependencies
+
+    - if: ${{ inputs.ruff  == 'true' }}
+      uses: astral-sh/ruff-action@v3

@@ -1,0 +1,96 @@
+name: Unreal Actions Collection
+description: Run actions for Unreal to improve code review experience and CI/CD.
+author: brumenn
+
+inputs:
+  # Unreal configuration.
+  version:
+    description: Engine version to use.
+    required: true
+    default: 5.5
+  plugin:
+    description: Plugin root directory.
+    required: false
+    default: .
+  version_from_branch:
+    description: Get the engine version to use from branch name.
+    required: false
+    default: false
+  # Unreal tooling.
+  build_plugin:
+    description: Generate the plugin build artifacts.
+    required: false
+    default: false
+  deploy_plugin:
+    description: Deploy the plugin to target.
+    required: false
+    default: false
+  target:
+    description: Target location to deploy the plugin.
+    required: false
+    default: .
+
+
+
+runs:
+  using: "composite"
+  steps:
+
+    # Get branch name and extract engine version to use, if inputs.version_from_branch is true. Otherwise use inputs.version.
+    - name: Get version
+      id: branch
+      shell: bash
+      run: |
+        if [ "${{ github.event_name }}" == "pull_request" ]; then
+          BRANCH_NAME=${{ github.head_ref }}
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_OUTPUT
+        else
+          BRANCH_NAME=${GITHUB_REF##*/}
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_OUTPUT
+        fi
+
+        echo "Branch: $BRANCH_NAME"
+
+        # Get the version
+        if [ "${{ inputs.version_from_branch }}" == "true" ]; then
+          if [ "$BRANCH_NAME" == "main" ]; then
+            VERSION=${{ inputs.version }}
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          else
+          VERSION=$BRANCH_NAME
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          fi
+        else
+          VERSION=${{ inputs.version }}
+        fi
+
+        echo "Version: $VERSION"
+
+    # - name: Get branch names
+    #   id: branch-names
+    #   uses: tj-actions/branch-names@v9
+
+    # We need access to bash scripts (.gha/scripts).
+    - name: Checkout reusable workflow repository
+      uses: actions/checkout@v4 # v4.2.2
+      with:
+        repository: androidsassocies/.gha
+        path: .gha
+
+    # Generate the build artifacts with RunUAT shiped with the engine.
+    - name: Build plugin
+      if: ${{ inputs.build_plugin == 'true' }}
+      shell: cmd
+      # This script requires aliases to work which is not possible in non-interactive shells. So -i argument corresponds to interactive mode.
+      run: |
+        sh -i ./.gha/scripts/build_unreal_plugin.sh -v ${{ steps.branch.outputs.VERSION }} -p ${{ inputs.plugin }}
+
+    # Deploy the plugin to the inputs.target path, which should correspond to the production environment.
+    - name: Deploy plugin to production
+      if: ${{ inputs.deploy_plugin == 'true' }}
+      shell: cmd
+      # Pay attention to the target path, '\\' gives '\',
+      # so to get a real '\\' write '\\\\' or use '/' instead of '\'.
+      # (e.g '\\\\10.20.19.152\Shared\MyPlugins' or '//10.20.19.152/Shared/MyPlugins')
+      run: |
+        sh ./.gha/scripts/deploy_unreal_plugin.sh -v ${{ steps.branch.outputs.VERSION }} -t ${{ inputs.target }} -p ${{ inputs.plugin }} -o -c

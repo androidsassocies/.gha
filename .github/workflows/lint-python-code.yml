@@ -1,0 +1,17 @@
+name: Lint python code
+
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint python code with Ruff
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Lint with Ruff
+        uses: androidsassocies/.gha/.github/actions/python@main
+        with:
+          ruff: true
